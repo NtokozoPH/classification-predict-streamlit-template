@@ -37,23 +37,31 @@ raw = pd.read_csv("resources/train.csv")
 
 # The main function where we will build the actual app
 def main():
-	"""Tweet Classifier App with Streamlit """
+	"""Tweet Classifier App"""
 
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
 	st.title("Tweet Classifer")
+
+	from PIL import Image
+
+	image = Image.open('resources/imgs/bird.jpg')
+	st.image(image, caption='What does your tweet say about climate change?', use_column_width=True)
 	st.subheader("Climate change tweet classification")
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "Information"]
-	selection = st.sidebar.selectbox("Choose Option", options)
+	options = ["Prediction","Visual Analysis", "Information"]
+	selection = st.sidebar.radio("Select Option", options)
 
 	# Building out the "Information" page
 	if selection == "Information":
-		st.info("General Information")
+		st.info("About")
 		# You can read a markdown file from supporting resources folder
-		st.markdown("Some information here")
+		st.markdown("""This App allows the user to input text(ideally a tweet relating to climate change), and will
+                       classify it according to whether or not they believe in climate change.
+                       You can have a look at the Explanatory Data Analysis on **Visuals Analysis** page,
+					   and make your predictions on the **Predictions** page by navigating on the sidebar.""")
 
 		st.subheader("Raw Twitter data and label")
 		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
